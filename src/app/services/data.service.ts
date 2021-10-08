@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { AppserverService } from '../appserver.service';
 export interface Message {
   fromName: string;
   subject: string;
@@ -21,8 +23,8 @@ export class DataService {
       read: false
     },
     {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
+      fromName: '201510001',
+      subject: 'Asri Motor Group',
       date: '6:12 AM',
       id: 1,
       read: false
@@ -70,9 +72,56 @@ export class DataService {
       read: false
     }
   ];
-
-  constructor() { }
-
+  obj: Observable<any>
+  constructor(
+    private http: HttpClient, 
+    private appserver:AppserverService
+    ) {
+    this.obj = http.get('http://192.168.0.117:20214/gettickets')
+    this.obj.subscribe(
+      success=>{
+        console.log('Success',success)
+        this.messages = success
+      },
+      error=>{
+        console.log('Error',error)
+      }
+    )
+  }
+  public getTickets(callback){
+    this.obj = this.http.get('http://192.168.0.117:20214/gettickets')
+    this.obj.subscribe(
+      success=>{
+        console.log('Success',success)
+        callback(success)
+      },
+      error=>{
+        console.log('Error',error)
+      }
+    )
+  }
+  public getTicketByKdticket(obj,callback){
+    this.obj = this.http.get(this.appserver.server+'/getticketbykdticket/'+obj.kdticket)
+    this.obj.subscribe(
+      success=>{
+        callback(success)
+      },
+      error=>{
+        console.log('Error',error)
+      }
+    )
+  }
+  public getFusByKdticket(obj,callback){
+    this.obj = this.http.get(this.appserver.server+'/getfusbykdticket/'+obj.kdticket)
+    this.obj.subscribe(
+      res=>{
+        callback(res)
+      },
+      err=>{
+        callback(err)
+      }
+    )
+  }
   public getMessages(): Message[] {
     return this.messages;
   }

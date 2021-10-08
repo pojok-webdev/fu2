@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { LazyComponent } from './lazy/lazy.component';
+import { SearchticketComponent } from './searchticket/searchticket.component';
 const routes: Routes = [
   {
     path: 'home',
@@ -15,6 +16,12 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {path:'lazy',
+  component:LazyComponent
+  },
+  {path:'search',
+  component:SearchticketComponent
+  }
 ];
 
 @NgModule({

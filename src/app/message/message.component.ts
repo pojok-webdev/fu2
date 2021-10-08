@@ -17,4 +17,7 @@ export class MessageComponent implements OnInit {
     const win = window as any;
     return win && win.Ionic && win.Ionic.mode === 'ios';
   }
+  dofu(){
+    console.log("DoFU")
+  }
 }
