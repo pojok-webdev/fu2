@@ -24,7 +24,11 @@
     <ion-label>
       <h2>{{fu.username}}</h2>
       <h3>{{fu.result}}</h3>
-      <p>{{fu.description}}</p>
+      <p>
+        <ion-text color="danger">
+          <div [innerHTML]="fu.description"></div>
+        </ion-text>
+      </p>
     </ion-label>
   </ion-item>
 

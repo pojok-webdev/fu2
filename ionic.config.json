@@ -1,5 +1,14 @@
 {
   "name": "fu2",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
+    "proxies": [
+    {
+      "path": "/getfusbykdticket",
+    "proxyUrl": "http://192.168.0.117:20214/getfusbykdticket"
+    }
+  ],
+
   "type": "angular"
 }
