@@ -22,7 +22,6 @@
     "@capacitor/core": "3.2.4",
     "@ionic/angular": "^5.5.2",
     "@tinymce/tinymce-angular": "^4.2.4",
-    "cordova-android": "9.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

@@ -4,6 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppserverService {
-  server = 'http://192.168.0.117:20214'
+  server = 'https://database.padinet.com:20214'
   constructor() { }
 }

@@ -7,7 +7,7 @@ import { PopoverController } from '@ionic/angular';
   styleUrls: ['./popupkdticketsearch.component.scss'],
 })
 export class PopupkdticketsearchComponent implements OnInit {
-  kdticket = "haha"
+  kdticket = ""
 
   constructor(private popover: PopoverController) { }
   ngOnInit() {}
