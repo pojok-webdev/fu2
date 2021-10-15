@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs'
+import { HTTP } from '@ionic-native/http/ngx'
 import { AppserverService } from '../appserver.service';
 export interface Message {
   fromName: string;
@@ -75,9 +76,10 @@ export class DataService {
   obj: Observable<any>
   constructor(
     private http: HttpClient, 
+    private nhttp: HTTP,
     private appserver:AppserverService
     ) {
-    this.obj = http.get('http://192.168.0.117:20214/gettickets')
+    this.obj = http.get(this.appserver.server+'/gettickets')
     this.obj.subscribe(
       success=>{
         console.log('Success',success)
@@ -89,7 +91,7 @@ export class DataService {
     )
   }
   public getTickets(callback){
-    this.obj = this.http.get('http://192.168.0.117:20214/gettickets')
+    this.obj = this.http.get(this.appserver.server+'/gettickets')
     this.obj.subscribe(
       success=>{
         console.log('Success',success)
@@ -108,6 +110,7 @@ export class DataService {
       },
       error=>{
         console.log('Error',error)
+        callback(error)
       }
     )
   }
@@ -128,5 +131,38 @@ export class DataService {
 
   public getMessageById(id: number): Message {
     return this.messages[id];
+  }
+  public getticket(obj,callback){
+    this.nhttp.get(this.appserver.server+'/getticketbykdticket/'+obj.kdticket,{},{})
+    .then(res=>{
+      callback(res)
+    })
+    .catch(err=>{
+      alert(JSON.stringify(err))
+      callback(err)
+    })
+  }
+  public getfus(obj,callback){
+    this.nhttp.get(this.appserver.server+'/getfusbykdticket/'+obj.kdticket,{},{})
+    .then(res=>{
+      callback(res)
+    })
+    .catch(err=>{
+      alert(err.status)
+      alert(err.error)
+      alert(err.headers)
+      callback(err)
+    })
+  }
+  public saveFu(obj,callback){
+    this.obj = this.http.post(this.appserver.server+'/savefu/'+obj.kdticket,obj)
+    this.obj.subscribe(
+      res=>{
+        callback(res)
+      },
+      err=>{
+        callback(err)
+      }
+    )
   }
 }

@@ -1,0 +1,51 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>Penambahan FU</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Ticket ID</ion-label>
+    <ion-input value="{{ticket_id}}"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Tgl Followup</ion-label>
+    <ion-input value="{{client_id}}"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">PIC</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Telepon</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Hasil</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Keterangan</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Kesimpulan</ion-label>
+    <ion-textarea></ion-textarea>
+  </ion-item>
+  
+  <ion-button (click)="saveFu()">
+    <ion-icon name="save-outline"></ion-icon>
+    <ion-label> Simpan</ion-label>
+  </ion-button>
+  <ion-button (click)="closePopup()">
+    <ion-icon name="close-outline"></ion-icon>
+    <ion-label> Tutup</ion-label>
+  </ion-button>
+</ion-content>

@@ -1,10 +1,12 @@
 <ion-toolbar>
   <ion-buttons slot="secondary">
-    <ion-button>
-      <ion-icon slot="icon-only" name="person-circle"></ion-icon>
-    </ion-button>
     <ion-button (click)="showMenu()">
       <ion-icon slot="icon-only" name="search"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-buttons slot="secondary">
+    <ion-button (click)="showAdd()">
+      <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
   <ion-buttons slot="primary">
@@ -12,7 +14,7 @@
       <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-title>Followup Ticket ({{ticket.kdticket}}) - {{ticket.clientname}}</ion-title>
+  <ion-title>FU ({{ticket.kdticket}}) - {{ticket.clientname}}</ion-title>
 </ion-toolbar>
 
 <!-- List of Input Items -->
