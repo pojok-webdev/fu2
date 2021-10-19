@@ -8,19 +8,33 @@ import { PopoverController, NavParams } from '@ionic/angular';
 })
 export class PopupaddfuComponent implements OnInit {
   ticket_id 
+  fu = {
+    ticket_id:0,
+    followupDate:'',
+    picname:'',
+    picphone:'',
+    result:'',
+    description:'',
+    conclusion:''
+  }
   constructor(private popover: PopoverController,private data: NavParams) {
-    this.ticket_id = this.data.get('ticket_id')
+    this.ticket_id = this.data.get('id')
+    this.fu.ticket_id = this.data.get('id')
   }
 
   ngOnInit() {}
   saveFu(){
     this.popover.dismiss({
-      result:'ok'
+      result:"ok",
+      data:this.fu
     })
   }
   closePopup(){
     this.popover.dismiss({
-      result:'closed'
+      result:"closed"
     })
+  }
+  setinput(field,value){
+    this.fu[field] = value
   }
 }

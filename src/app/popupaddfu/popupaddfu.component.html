@@ -1,43 +1,38 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>Penambahan FU</ion-title>
+    <ion-title>FU {{ticket_id}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-label position="floating">Ticket ID</ion-label>
-    <ion-input value="{{ticket_id}}"></ion-input>
-  </ion-item>
-  
+<ion-content>  
   <ion-item>
     <ion-label position="floating">Tgl Followup</ion-label>
-    <ion-input value="{{client_id}}"></ion-input>
+    <ion-input value="{{fu.followupDate}}" (input)="setinput('followupDate',$event.target.value)"></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label position="floating">PIC</ion-label>
-    <ion-input></ion-input>
+    <ion-input [(ngModel)]="fu.picname" (input)="setinput('picname',$event.target.value)"></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label position="floating">Telepon</ion-label>
-    <ion-input></ion-input>
+    <ion-input [(ngModel)]="fu.picphone" (input)="setinput('picphone',$event.target.value)"></ion-input>
   </ion-item>
   
   <ion-item>
     <ion-label position="floating">Hasil</ion-label>
-    <ion-textarea></ion-textarea>
+    <ion-textarea [(ngModel)]="fu.result" (input)="setinput('result',$event.target.value)"></ion-textarea>
   </ion-item>
   
   <ion-item>
     <ion-label position="floating">Keterangan</ion-label>
-    <ion-textarea></ion-textarea>
+    <ion-textarea [(ngModel)]="fu.description" (input)="setinput('description',$event.target.value)"></ion-textarea>
   </ion-item>
   
   <ion-item>
     <ion-label position="floating">Kesimpulan</ion-label>
-    <ion-textarea></ion-textarea>
+    <ion-textarea [(ngModel)]="fu.conclusion" (input)="setinput('conclusion',$event.target.value)"></ion-textarea>
   </ion-item>
   
   <ion-button (click)="saveFu()">

@@ -155,7 +155,29 @@ export class DataService {
     })
   }
   public saveFu(obj,callback){
-    this.obj = this.http.post(this.appserver.server+'/savefu/'+obj.kdticket,obj)
+    this.obj = this.http.post<any>(this.appserver.server+'/savefu',obj)
+    this.obj.subscribe(
+      res=>{
+        callback(res)
+      },
+      err=>{
+        callback(err)
+      }
+    )
+  }
+  public saveMobile(obj,callback){
+    this.obj = this.http.post<any>(this.appserver.server+'/savemobile',obj)
+    this.obj.subscribe(
+      res=>{
+        callback(res)
+      },
+      err=>{
+        callback(err)
+      }
+    )
+  }
+  public getUsers(callback){
+    this.obj = this.http.get(this.appserver.server+'/getusers')
     this.obj.subscribe(
       res=>{
         callback(res)

@@ -3,6 +3,7 @@ import { DataService } from '../services/data.service';
 import { PopoverController } from '@ionic/angular';
 import { PopupkdticketsearchComponent } from '../popupkdticketsearch/popupkdticketsearch.component';
 import { PopupaddfuComponent } from '../popupaddfu/popupaddfu.component';
+import { AboutComponent } from '../about/about.component';
 
 @Component({
   selector: 'app-searchticket',
@@ -45,10 +46,11 @@ export class SearchticketComponent implements OnInit {
     })
     await popover.present()
     await popover.onDidDismiss().then(result=>{
-      this.data.saveFu(result,res=>{
+      this.data.saveFu(result.data.data,res=>{
         console.log('Save Res',res)
         alert(JSON.stringify(res))
       })
+      //alert(JSON.stringify(result.data.data))
     })
   }
   getFus(obj){
@@ -56,5 +58,11 @@ export class SearchticketComponent implements OnInit {
       console.log('Fus',fus)
       this.fus = fus
     })
+  }
+  async showAbout(){
+    const popover = await this.popoverController.create({
+      component:AboutComponent
+    })
+    await popover.present()
   }
 }
