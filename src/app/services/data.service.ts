@@ -187,4 +187,15 @@ export class DataService {
       }
     )
   }
+  public getUserByImei(obj,callback){
+    this.obj = this.http.get(this.appserver.server+'/getuserbyimei/'+obj.imei)
+    this.obj.subscribe(
+      res=>{
+        callback(res)
+      },
+      err=>{
+        callback(err)
+      }
+    )
+  }
 }

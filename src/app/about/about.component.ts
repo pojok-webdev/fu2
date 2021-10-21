@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Uid } from '@ionic-native/uid/ngx'
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx'
-import { Platform } from '@ionic/angular';
 import { DataService } from '../services/data.service';
 @Component({
   selector: 'app-about',
@@ -10,7 +9,10 @@ import { DataService } from '../services/data.service';
 })
 export class AboutComponent implements OnInit {
 imei
-users
+users = [
+  {id:17,username:'Puji'},
+  {id:75,username:'Rendy'}
+]
 user
   constructor(
     private uid:Uid,

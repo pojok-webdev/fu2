@@ -1,14 +1,8 @@
-<p>
-  Imei anda :{{imei}}
-
-</p>
-<ion-item>
-  <ion-label position="floating">Nama</ion-label>
-  <ion-select [(ngModel)]="user">
-    <ion-select-option *ngFor="let user of users" value="user.id">{{user.username}}</ion-select-option>
-  </ion-select>
-</ion-item>
 <ion-button (click)="saveID()">
   <ion-icon name="save-outline"></ion-icon>
   <ion-label> Register</ion-label>
 </ion-button>
+<p>{{imei}}</p>
+    <ion-label position="floating" >Nama</ion-label>
+    <ion-select [(ngModel)]="user" interface="popover">
+      <ion-select-option *ngFor="let user of users" value="{{user.id}}">{{user.username}}</ion-select-option>

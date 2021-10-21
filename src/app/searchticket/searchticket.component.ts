@@ -4,6 +4,8 @@ import { PopoverController } from '@ionic/angular';
 import { PopupkdticketsearchComponent } from '../popupkdticketsearch/popupkdticketsearch.component';
 import { PopupaddfuComponent } from '../popupaddfu/popupaddfu.component';
 import { AboutComponent } from '../about/about.component';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Uid } from '@ionic-native/uid/ngx';
 
 @Component({
   selector: 'app-searchticket',
@@ -17,10 +19,51 @@ export class SearchticketComponent implements OnInit {
     clientname:''
   }
   fus = []
-  constructor(private data:DataService,private popoverController:PopoverController) {
+  user = {
+    id:0,username:'',imei:''
+  }
+  imei
+  constructor(
+    private data:DataService,
+    private popoverController:PopoverController,
+    private permission: AndroidPermissions,
+    private uid: Uid
+  ) {
+    this.getmyImei()
+    .then(imei=>{
+      this.imei = imei
+      alert(JSON.stringify(imei))
+      this.data.getUserByImei({imei:imei},user=>{
+        this.user = user
+      })
+    })
+    .catch(err=>{
+      alert(JSON.stringify(err))
+      console.log('Err get imei',err)
+    })
   }
   ngOnInit() {}
-  
+  async getmyImei() {
+    const { hasPermission } = await this.permission.checkPermission(
+      this.permission.PERMISSION.READ_PHONE_STATE
+    );
+   
+    if (!hasPermission) {
+      const result = await this.permission.requestPermission(
+        this.permission.PERMISSION.READ_PHONE_STATE
+      );
+   
+      if (!result.hasPermission) {
+        throw new Error('Permissions required');
+      }
+   
+      // ok, a user gave us permission, we can get him identifiers after restart app
+      return;
+    }
+   
+     return this.uid.IMEI
+   }
+
   async showMenu(){
     const popover = await this.popoverController.create({
       component:PopupkdticketsearchComponent
