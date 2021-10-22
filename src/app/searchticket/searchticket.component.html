@@ -1,15 +1,12 @@
-<ion-toolbar>
-  <ion-title>{{imei}} {{user.username}}</ion-title>
-  
 
-</ion-toolbar>
+<ion-header>
 <ion-toolbar>
   <ion-buttons slot="secondary">
     <ion-button (click)="showMenu()">
       <ion-icon slot="icon-only" name="search"></ion-icon>
     </ion-button>
   </ion-buttons>
-  <ion-buttons slot="secondary">
+  <ion-buttons slot="secondary" *ngIf="canAddFu">
     <ion-button (click)="showAdd()">
       <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
     </ion-button>
@@ -19,24 +16,24 @@
       <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
     </ion-button>
   </ion-buttons>
+  <ion-title>{{imei}} {{user.username}}</ion-title>
   <ion-title>FU ({{ticket.kdticket}}) - {{ticket.clientname}}</ion-title>
 </ion-toolbar>
-
+</ion-header>
 <!-- List of Input Items -->
-<ion-list>
-  <ion-item *ngFor="let fu of fus">
-    <ion-avatar slot="start">
-      <ion-icon name="diamond-outline"></ion-icon>
-    </ion-avatar>
-    <ion-label>
-      <h2>{{fu.username}}</h2>
-      <h3>{{fu.result}}</h3>
-      <p>
-        <ion-text color="danger">
-          <div [innerHTML]="fu.description"></div>
-        </ion-text>
-      </p>
-    </ion-label>
-  </ion-item>
-</ion-list>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let fu of fus">
+      <ion-label>
+        <h2>{{fu.username}}</h2>
+        <h3>{{fu.result}}</h3>
+        <p>
+          <ion-text color="danger">
+            <div [innerHTML]="fu.description"></div>
+          </ion-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>  
 
+</ion-content>

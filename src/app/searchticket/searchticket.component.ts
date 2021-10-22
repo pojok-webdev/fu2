@@ -13,6 +13,7 @@ import { Uid } from '@ionic-native/uid/ngx';
   styleUrls: ['./searchticket.component.scss'],
 })
 export class SearchticketComponent implements OnInit {
+  canAddFu = false
   ticket = {
     id:0,
     kdticket:'',
@@ -29,18 +30,19 @@ export class SearchticketComponent implements OnInit {
     private permission: AndroidPermissions,
     private uid: Uid
   ) {
-    this.getmyImei()
-    .then(imei=>{
-      this.imei = imei
-      alert(JSON.stringify(imei))
-      this.data.getUserByImei({imei:imei},user=>{
-        this.user = user
+    setTimeout(_=>{
+      this.getmyImei()
+      .then(imei=>{
+        this.imei = imei
+        this.data.getUserByImei({imei:imei},user=>{
+          this.user = user
+        })
       })
-    })
-    .catch(err=>{
-      alert(JSON.stringify(err))
-      console.log('Err get imei',err)
-    })
+      .catch(err=>{
+        console.log('Err get imei',err)
+      })
+  
+    },1000)
   }
   ngOnInit() {}
   async getmyImei() {
@@ -70,11 +72,23 @@ export class SearchticketComponent implements OnInit {
     })
     await popover.present()
     await popover.onDidDismiss().then(result=>{
-      console.log('Resut',result)
+      //console.log('Resut',result)
       this.data.getTicketByKdticket({kdticket:result.data.data.kdticket},result=>{
         console.log('Result',result)
-        this.ticket = result[0]
-        this.getFus(result[0])
+        if(result.length>0){
+          this.canAddFu = true
+          this.ticket = result[0]
+          this.getFus(result[0])
+          }else{
+            console.log('empty result')
+          this.canAddFu = false
+          this.ticket = {
+            id:0,
+            kdticket:'',
+            clientname:''
+          }
+          this.fus = []
+        }
       })
     })
   }
@@ -89,11 +103,13 @@ export class SearchticketComponent implements OnInit {
     })
     await popover.present()
     await popover.onDidDismiss().then(result=>{
-      this.data.saveFu(result.data.data,res=>{
-        console.log('Save Res',res)
-        alert(JSON.stringify(res))
-      })
-      //alert(JSON.stringify(result.data.data))
+      if(result.data.result ==="ok"){
+        this.data.saveFu(result.data.data,res=>{
+          console.log('Save Res',res)
+          this.getFus(this.ticket)
+//          alert(JSON.stringify(res))
+        })
+      }
     })
   }
   getFus(obj){
