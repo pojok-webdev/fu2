@@ -98,7 +98,8 @@ export class SearchticketComponent implements OnInit {
       componentProps:{
         id:this.ticket.id,
         kdticket:this.ticket.kdticket,
-        clientname:this.ticket.clientname
+        clientname:this.ticket.clientname,
+        username:this.user.username
       }
     })
     await popover.present()

@@ -7,7 +7,7 @@
 <ion-content>  
   <ion-item>
     <ion-label position="floating">Tgl Followup</ion-label>
-    <ion-input value="{{fu.followupDate}}" (input)="setinput('followupDate',$event.target.value)"></ion-input>
+    <ion-datetime displayFormat="YYYY-MM-DD hh:mm:ss" picker-format="MM DD YYYY" type="button" ([ngModel])="fu.followupDate" (ionChange)="check($event)" value="{{fu.followupDate}}" placeholder="Pilih Tanggal"></ion-datetime>
   </ion-item>
   
   <ion-item>
@@ -22,7 +22,11 @@
   
   <ion-item>
     <ion-label position="floating">Hasil</ion-label>
-    <ion-textarea [(ngModel)]="fu.result" (input)="setinput('result',$event.target.value)"></ion-textarea>
+    <ion-select[(ngModel)]="fu.result" (change)="setinput('result',$event.target.value)">
+      <ion-select-option (value)="0">Progress</ion-select-option>
+      <ion-select-option (value)="1">OK</ion-select-option>
+      <ion-select-option (value)="3">Tidak dapat dihubungi</ion-select-option>
+    </ion-select>
   </ion-item>
   
   <ion-item>

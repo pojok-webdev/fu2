@@ -15,15 +15,18 @@ export class PopupaddfuComponent implements OnInit {
     picphone:'',
     result:'',
     description:'',
-    conclusion:''
+    conclusion:'',
+    username:''
   }
   constructor(private popover: PopoverController,private data: NavParams) {
     this.ticket_id = this.data.get('id')
     this.fu.ticket_id = this.data.get('id')
+    this.fu.username = this.data.get('username')
   }
 
   ngOnInit() {}
   saveFu(){
+    //alert(JSON.stringify(this.fu))
     this.popover.dismiss({
       result:"ok",
       data:this.fu
@@ -35,6 +38,17 @@ export class PopupaddfuComponent implements OnInit {
     })
   }
   setinput(field,value){
+    console.log('INPUT',field,value)
     this.fu[field] = value
+  }
+  check(x){
+    let arr = (x.detail.value).toString().split('T')
+    let dt = arr[0]
+    let tm = arr[1]
+    console.log('dt',dt)
+    console.log('tm',tm)
+    console.log('x detail',x.detail.value)
+    console.log('fu',JSON.stringify(arr[0]))
+    this.fu.followupDate = dt
   }
 }

@@ -2,6 +2,15 @@
     --width: 500px;
   }
 h2{
-background-color:black;
-color: bisque;
+  background-color:black;
+  color: bisque;
+}
+h3{
+  color:white;
+}
+ion-header{
+  --ion-background-color:gold;
+}
+ion-content{
+  --ion-background-color:black;
 }
